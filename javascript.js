@@ -1,22 +1,42 @@
 var display = document.getElementById("input");
-var displayout = document.getElementById("output");
+
 
 function joint(n){
-  display.innerHTML += n;
+  if(display.innerHTML === "" && (n === "+" || n ==="-" || n ==="*" || n==="/" || n ==="+-" || n==="%")){
+          display.innerHTML = "Error";
+  }else if (display.innerHTML === "Error" && (n === "+" || n ==="-" || n ==="*" || n==="/" || n ==="+-" || n==="%")) {
+          display.innerHTML = "";
+  }
+  else {
+    display.innerHTML += n;
+  }
 }
 
 function equal(){
 
- displayout.innerHTML += display.innerHTML;
-  var  c = eval(display.innerHTML);
-  display.innerHTML = c;
+  if(display.innerHTML ==="Error"){
+    display.innerHTML = "";
+  }
+  else {
+    var  c = eval(display.innerHTML);
+    display.innerHTML = c;
+  }
+
 }
 
 function clear(){
+  
   display.innerHTML = "";
-  displayout.innerHTML = "";
 }
 
+function del(){
+  var n = window.screen.width;
+  if (n < 800 ){
+     document.getElementById("output").remove();
+}
+}
+
+del();
 
 document.getElementById("c").addEventListener("click",function(){ clear();});
 document.getElementById("addsub").addEventListener("click",function(){ joint('+-'); });
